@@ -24,7 +24,6 @@ def date_parser(value: str | date | datetime) -> date | datetime:
         except ValueError:
             pass
 
-    # Se chegarmos até aqui, então a string de data não está em nenhum dos formatos fornecidos
     raise ValueError(f"Time '{value}' is not in a recognized format")
 
 
@@ -32,7 +31,7 @@ def date_range(start_date: date, end_date: date, include_weekends: bool = True):
     delta = timedelta(days=1)
 
     while start_date <= end_date:
-        if include_weekends or start_date.weekday() < 5:  # 0-4 indica dias da semana
+        if include_weekends or start_date.weekday() < 5:
             yield start_date
         print(start_date, start_date.weekday())
         start_date += delta

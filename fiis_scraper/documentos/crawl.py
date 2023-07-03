@@ -4,7 +4,9 @@ from typing import Any, Generator, Union
 
 import requests
 
-URL_BASE = "https://fnet.bmfbovespa.com.br/fnet/publico/pesquisarGerenciadorDocumentosDados"
+URL_BASE = (
+    "https://fnet.bmfbovespa.com.br/fnet/publico/pesquisarGerenciadorDocumentosDados"
+)
 DEFAULT_LIMIT = 200
 TIPO_FUNDO = 1
 ID_CATEGORIA_DOCUMENTO = 14
@@ -43,7 +45,9 @@ def fetch_data_page(url: str, params: dict[str, Any]) -> Union[Any, None]:
         return None
 
 
-def generate_data_pages(reference_date: Union[str, date, datetime]) -> Generator[Any, Any, None]:
+def generate_data_pages(
+    reference_date: Union[str, date, datetime]
+) -> Generator[Any, Any, None]:
     """
     Gera páginas de dados.
     """
