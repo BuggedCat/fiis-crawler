@@ -28,7 +28,9 @@ def put_to_s3(
             Bucket=bucket,
             Key=key,
         )
-        print(f"Data successfully put to S3 under the key {key} in the bucket {bucket}.")
+        print(
+            f"Data successfully put to S3 under the key {key} in the bucket {bucket}."
+        )
     except Exception as e:
         raise e
 
