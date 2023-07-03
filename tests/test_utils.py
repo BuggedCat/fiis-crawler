@@ -30,13 +30,21 @@ def test_date_parser_with_strings(input_date, expected_date):
 def test_date_parser_with_unrecognized_format(unrecognized_date_string):
     with pytest.raises(ValueError) as e:
         date_parser(unrecognized_date_string)
-    assert str(e.value) == f"Time '{unrecognized_date_string}' is not in a recognized format"
+    assert (
+        str(e.value)
+        == f"Time '{unrecognized_date_string}' is not in a recognized format"
+    )
 
 
 @pytest.mark.parametrize(
     "start_date, end_date, include_weekends, expected",
     [
-        (date(2023, 1, 1), date(2023, 1, 7), True, [date(2023, 1, i) for i in range(1, 8)]),
+        (
+            date(2023, 1, 1),
+            date(2023, 1, 7),
+            True,
+            [date(2023, 1, i) for i in range(1, 8)],
+        ),
         (
             date(2023, 1, 1),
             date(2023, 1, 7),
