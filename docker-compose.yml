@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  app:
+    container_name: fiis_scraper
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: ["python", "-m", "fiis_scraper.documentos", "-s", "2023-06-20", "-e", "2023-06-30"]
+    environment:
+      DOCKER: True
+    env_file:
+      - .env.docker
+    depends_on:
+      - minio
+
+  minio:
+    build: 
+      context: minio
+      dockerfile: Dockerfile
+    container_name: minio
+    volumes:
+      - data:/data
+    env_file:
+      - .env.docker
+    environment:
+      MINIO_ROOT_USER: ${AWS_ACCESS_KEY_ID}
+      MINIO_ROOT_PASSWORD: ${AWS_SECRET_ACCESS_KEY}
+    ports:
+      - "9000:9000"
+      - "9090:9090"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 30s
+      timeout: 20s
+      retries: 3
+
+volumes:
+  data: 
